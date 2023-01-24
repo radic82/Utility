@@ -6,6 +6,9 @@ this project contains utility "program" to help daily work
 
 * **gitCheckout.cmd** - cmd to checkout multiple projects as same time
 
+### github hooks
+this folder contains an example of github hooks. there is a script.cmd file that will be used to configure the hook in your gitconfig file.
+
 ## XSL
 > this folder contains a file with some utilities XSL function
 
