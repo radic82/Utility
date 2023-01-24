@@ -1,0 +1,32 @@
+#!/bin/bash
+
+checkComment() {
+  if [[ -z $message ]] ; then
+    echo "**[ERROR] - commit message must not be empty" 
+    exit 1
+  else
+    if [[ $message =~ ^.*(JIRA|JXXX)-[0-9]+.* ]]; then
+      echo "**[OK] - $message"
+    else
+      if [[ $message =~ ^.*(WEEKLY-MERGE|Merge|merge|#utility#).* ]]; then
+        echo "**[OVERRIDE-RULE]"
+      else
+        echo "**[ERROR] - commit message must contain JIRA-, JXXX-"
+        exit 1
+      fi
+    fi
+  fi
+}
+
+checkPathAllowedUser() {
+  if echo "$committingDiff" | grep -qE "$dangerPath" ;then
+    if [[ $message =~ $safeWord ]]; then
+      echo "**[OVERRIDE-RULE] - $dangerPath"
+    elif [[ $gitAllowedUser == *"$gitUser"* ]]; then
+      echo "**[OVERRIDE-RULE] - $gitUser"
+    else
+      echo "**[ERROR] - $errorMessage"
+      exit 1
+    fi
+  fi
+}
