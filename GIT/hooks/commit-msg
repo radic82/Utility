@@ -1,0 +1,25 @@
+#!/bin/bash
+# WARNING regexp with (( passed as param causes some issues.
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+source $(git config core.hookspath)/regexp-checker
+message=$(cat "$COMMIT_MSG_FILE")
+gitUser=$(git config user.name)
+
+#GROUP
+#the SAFE_WORD are #pom_push_allowed# WEEKLY-MERGE maven-release-plugin #utility#
+
+#retrieving files that will be committed
+committingDiff=$(git diff --cached --name-only)
+
+#1 - comment must contain JXXX|JIRA or safe word
+checkComment
+
+#2 - block pom.xml - finding all committing files to avoid committing dangerous patterns or write #pom_push_allowed#
+dangerPath="\W?pom.xml$"
+safeWord="^.*(#pom_push_allowed#|maven-release-plugin).*"
+gitAllowedUser="gitUser_1;gitUser2"
+errorMessage="files that matches $dangerPath not allowed to be committed."
+checkPathAllowedUser
