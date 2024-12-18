@@ -13,10 +13,3 @@ this folder contains an example of github hooks. there is a script.cmd file that
 > this folder contains a file with some utilities XSL function
 
 Uppercase, Escape, Capitalize, Truncate, StrMin, DateFormat, DateFormatFromDB, FullDateFormat, CurrentDate, CurrentDateTime, RemoveHtmlTags, RemoveNBSP, Replace, javaReplaceString, LastIndexOf, createLink, createImage, randomNumber, EncodeUrl, DencodeUrl, JSON, JS Array (JS Array Element, Set JS Var, CDataOpen, CDataClose)
-
-## Node
-> this folder contains utility commands based on Node.js technology
-
-### finder.js
-this utility search in a dir the files that contains specific word. How to use `node finder.js searchWord dirToScan`. the output is simply console log.
-
